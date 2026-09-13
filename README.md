@@ -1,19 +1,21 @@
 # TypeCount
 
-TypeCount is a small macOS 13+ menu bar utility that estimates how many characters you type each day.
+简体中文 | [English](README.en.md)
 
-It shows only a keyboard icon in the menu bar. Hover over the icon for today's total, or click it for a seven-day view, pause control, and permission status.
+TypeCount 是一款适用于 macOS 13 及以上版本的轻量菜单栏工具，用于估算每天的打字字数。
 
-## Counting rules
+菜单栏中只显示一个键盘图标。将鼠标悬停在图标上可查看今日总数，点击图标可查看最近 7 天的统计、暂停或恢复统计，以及查看权限状态。
 
-- English input sources: letters, numbers, punctuation, and spaces count as one character.
-- Chinese input sources: every two letter keys count as one estimated character; numbers, punctuation, and spaces count as one.
-- Command and Control shortcuts, Return, Delete, Tab, navigation keys, and function keys are ignored.
-- Paste, dictation, autocomplete, and deletions do not affect the total.
+## 计数规则
 
-TypeCount never stores characters, key sequences, application names, or text field contents. It has no networking or telemetry.
+- 英文输入法：字母、数字、标点和空格，每次按键计为 1 个字符。
+- 中文输入法：每按 2 次字母键，估算为 1 个字；数字、标点和空格，每次按键计为 1 个字符。
+- 忽略 Command 和 Control 快捷键，以及 Return、Delete、Tab、方向导航键和功能键。
+- 粘贴、语音输入、自动补全和删除操作不会改变总数。
 
-## Build and install
+TypeCount 不保存输入的字符、按键序列、应用名称或文本框内容，也不进行联网通信或遥测。
+
+## 构建与安装
 
 ```sh
 swift test
@@ -22,12 +24,12 @@ cp -R dist/TypeCount.app /Applications/
 open /Applications/TypeCount.app
 ```
 
-Grant Input Monitoring when macOS asks. Permission is tied to the installed app location, so install the app before granting access.
+macOS 提示时，请授予 TypeCount「输入监控」权限。权限与应用的安装位置关联，因此应先安装应用，再授权。
 
-If TypeCount still says `Needs access` after its switch is enabled, the permission belongs to an older build. In System Settings > Privacy & Security > Input Monitoring, select the old TypeCount entry and remove it with the minus button. Add `/Applications/TypeCount.app` again, enable it, and reopen TypeCount.
+如果已开启权限开关，TypeCount 仍显示 `Needs access`，请检查旧版本留下的权限记录：进入「系统设置 > 隐私与安全性 > 输入监控」，选中旧的 TypeCount 条目并点击减号移除，再重新添加 `/Applications/TypeCount.app`，开启权限并重新打开应用。
 
-The build is ad-hoc signed for local use with a stable designated requirement so later local rebuilds keep the same Input Monitoring identity. Add TypeCount to Open at Login in System Settings if desired.
+构建脚本会为应用进行本地临时签名，并使用固定的签名身份要求，使后续本地重新构建能够保持相同的输入监控身份。如需开机自动运行，可在系统设置中将 TypeCount 添加到「登录时打开」。
 
-## Implementation references
+## 实现参考
 
-The project is an independent implementation informed by the event monitoring, persistence, and menu bar patterns in the MIT-licensed [KeyStats](https://github.com/debugtheworldbot/keyStats) and [Activity Bar](https://github.com/SuveenE/activity-bar) projects.
+本项目为独立实现，在事件监听、数据持久化和菜单栏交互方式上参考了采用 MIT 许可证的 [KeyStats](https://github.com/debugtheworldbot/keyStats) 和 [Activity Bar](https://github.com/SuveenE/activity-bar) 项目。
